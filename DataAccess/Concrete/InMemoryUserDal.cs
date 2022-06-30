@@ -14,9 +14,9 @@ namespace DataAccess.Concrete
 
         public InMemoryUserDal()
         {
-            _users = new List<User> { new User { Id = 1, UserName = "cAN", Adress="iZMİR",Email="atilgan@gmail.com",Password="123456789" },
-                                      new User { Id = 2, UserName = "Hasan", Adress="ANKARA",Email="hasan@gmail.com",Password="123456789" },
-                                      new User { Id = 3, UserName = "Uğur", Adress="İSTANBUL",Email="ugur@gmail.com",Password="123456789" },};
+            _users = new List<User> { new User { Id = 1, FirstName = "cAN", Adress="iZMİR",Email="atilgan@gmail.com",Password="123456789" },
+                                      new User { Id = 2, FirstName = "Hasan", Adress="ANKARA",Email="hasan@gmail.com",Password="123456789" },
+                                      new User { Id = 3, FirstName = "Uğur", Adress="İSTANBUL",Email="ugur@gmail.com",Password="123456789" },};
         }
 
         public void Add(User user)
@@ -58,7 +58,7 @@ namespace DataAccess.Concrete
             user.Adress = UserToUpdate.Adress;
             user.Email = UserToUpdate.Email;
             user.Password = UserToUpdate.Password;
-            user.UserName = UserToUpdate.UserName;
+            user.FirstName = UserToUpdate.FirstName;
            
         }
     }

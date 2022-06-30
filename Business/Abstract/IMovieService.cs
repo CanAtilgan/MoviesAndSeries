@@ -1,4 +1,5 @@
 ﻿using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,5 +13,6 @@ namespace Business.Abstract
         void Update(Movie movie);
         List<Movie> GetAll();
         Movie Get(int id);
+        List<MovieDetailDto> GetMovieDetails();
     }
 }

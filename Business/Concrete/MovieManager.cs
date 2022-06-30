@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -24,17 +25,22 @@ namespace Business.Concrete
 
         public void Delete(Movie movie)
         {
-            throw new NotImplementedException();
+            _movieDal.Delete(movie);
         }
 
         public Movie Get(int id)
         {
-            throw new NotImplementedException();
+            return _movieDal.Get(m=>m.Id==id );
         }
 
         public List<Movie> GetAll()
         {
             return _movieDal.GetAll();
+        }
+
+        public List<MovieDetailDto> GetMovieDetails()
+        {
+            return _movieDal.GetMovieDetails();
         }
 
         public void Update(Movie movie)

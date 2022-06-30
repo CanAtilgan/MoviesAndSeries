@@ -8,6 +8,7 @@ namespace Entities.Concrete
     public class Series:IEntity
     {
         public int Id { get; set; }
+        public int CategoryId { get; set; }
         public string SeriesName { get; set; }
         public string Description { get; set; }
         public string Direction { get; set; }

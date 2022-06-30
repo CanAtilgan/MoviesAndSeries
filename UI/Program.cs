@@ -19,19 +19,39 @@ namespace UI
             //    Console.WriteLine("{0} ------ {1}", user.UserName, user.Email);
             //}mm
 
-            //Movie movie = new Movie() { MovieName="Karayip Korsanları",Description="AKSİYON FİLMİ SEVERLER",Direction="JONYDEEP"};
-
             
-            //movieManager.Add(movie);
+
+
+             
             MovieManager movieManager = MovieTest();
+
+            //Category();
+
+        }
+
+        private static void Category()
+        {
+            Category cate = new Category();
+            cate.CategoryName = "AKSİYON";
+            Category cate2 = new Category();
+            cate.CategoryName = "KORKU";
+            CategoryManager category = new CategoryManager(new EfCategoryDal());
+            category.Add(cate);
+
+            foreach (var catego in category.GetAll())
+            {
+                Console.WriteLine("{0} ---{1}", catego.CategoryName, catego.Id);
+            }
         }
 
         private static MovieManager MovieTest()
         {
+            Movie movie3 = new Movie() { MovieName = "Yürüyen Ölüler", Description = "KORKU FİLMİ SEVERLER", CategoryId = 2,Direction="jONY" };
             MovieManager movieManager = new MovieManager(new EfMovieDal());
-            foreach (var mov in movieManager.GetAll())
+            movieManager.Add(movie3);
+            foreach (var mov in movieManager.GetMovieDetails())
             {
-                Console.WriteLine("{0} ------ {1}", mov.MovieName, mov.Description);
+                Console.WriteLine("{0} ------ {1}", mov.MovieName, mov.CategoryName);
             }
 
             return movieManager;
