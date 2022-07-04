@@ -19,11 +19,15 @@ namespace UI
             //    Console.WriteLine("{0} ------ {1}", user.UserName, user.Email);
             //}mm
 
-            
-
+            UserManager userManager = new UserManager(new EfUserDal());
+            var result = userManager.GetAll();
+            foreach (var user in result.Message)
+            {
+                Console.WriteLine(user);
+            }
 
              
-            MovieManager movieManager = MovieTest();
+            //MovieManager movieManager = MovieTest();
 
             //Category();
 
@@ -48,7 +52,7 @@ namespace UI
         {
             Movie movie3 = new Movie() { MovieName = "Yürüyen Ölüler", Description = "KORKU FİLMİ SEVERLER", CategoryId = 2,Direction="jONY" };
             MovieManager movieManager = new MovieManager(new EfMovieDal());
-            movieManager.Add(movie3);
+            //movieManager.Add(movie3);
             foreach (var mov in movieManager.GetMovieDetails())
             {
                 Console.WriteLine("{0} ------ {1}", mov.MovieName, mov.CategoryName);
