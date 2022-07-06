@@ -18,8 +18,8 @@ namespace WebAPI1.Controllers
         }
 
 
-        [HttpGet]
-        public IActionResult GetAll()
+        [HttpGet("get")]
+        public IActionResult Get()
         {
             var result = _movieService.GetAll();
             if (result.Success)
@@ -27,8 +27,32 @@ namespace WebAPI1.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
-
-
         }
+
+
+        [HttpPost("add")]
+        public IActionResult Add(Movie movie)
+        {
+            var result = _movieService.Add(movie);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
+        }
+
+        [HttpPost("update")]//update sıkıntılı ona bak
+        public IActionResult Update(Movie movie)
+        {
+            var result = _movieService.Update(movie);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result);
+        }
+
+
+
     }
 }

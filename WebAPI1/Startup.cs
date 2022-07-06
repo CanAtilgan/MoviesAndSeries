@@ -32,12 +32,15 @@ namespace WebAPI1
             services.AddControllers();
             //IoC , gelen clintelara referans yapýyoruz,ilgili baðýmlýla arka planda newleme yapar.
             //içerisinde data tutmuyorsan singleton kullanýmý güzel bir yapýdýdr
+            
             //bu yapý autofac ile tekrar yazýlcak daha iyi bir seviyede
-            services.AddSingleton<IUserService, UserManager>();
-            services.AddSingleton<IUserDal, EfUserDal > ();
+            //services.AddSingleton<IUserService, UserManager>();
+            //services.AddSingleton<IUserDal, EfUserDal > ();
 
-            services.AddSingleton<IMovieService, MovieManager>();
-            services.AddSingleton<IMovieDal, EfMovieDal > ();
+            //services.AddSingleton<IMovieService, MovieManager>();
+            //services.AddSingleton<IMovieDal, EfMovieDal > ();
+            
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

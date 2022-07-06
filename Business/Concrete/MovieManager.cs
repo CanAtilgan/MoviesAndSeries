@@ -1,9 +1,13 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules;
+using Core.Aspects.Autofac.Validation;
+using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -20,8 +24,22 @@ namespace Business.Concrete
             _movieDal = movieDal;
         }
 
+        [ValidationAspect(typeof(MovieValidator))]
         public IResult Add(Movie movie)
         {
+            //validation mantığı
+            //var context = new ValidationContext<Movie>(movie);
+            //MovieValidator validator = new MovieValidator();
+            //var result = validator.Validate(context);
+            //if (!result.IsValid)
+            //{
+            //    throw new ValidationException(result.Errors);
+            //}
+
+            //bu yapıda kötü , iç blok çorbaya dönmesin diye AOP ile , atribute olarak yaparız-aspact
+            //ValidationTool.Validation(new MovieValidator(),movie);
+
+
             _movieDal.Add(movie);
             return new SuccessResult();
         }
