@@ -9,7 +9,7 @@ namespace Core.CrossCuttingConcerns.Validation
     {
         //Ortak bir interface bulup onu validator olarak veriyoruz bu sayede refarans özelliğinden orası değişken yapıda olur 
         //object ise , en genel veri tipi olduğu için oraya istelen nesne yollanılabilir işlem için
-        public static void Validation(IValidator validator, object entity)
+        public static void Validate(IValidator validator, object entity)
         {
             var context = new ValidationContext<object>(entity);
             var result = validator.Validate(context);

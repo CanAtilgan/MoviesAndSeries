@@ -37,7 +37,7 @@ namespace Core.DataAccess.EntityFramewrok
             using (TContext context = new TContext())
             {
                 return context.Set<TEntity>().SingleOrDefault(filter);
-            }
+            }   
         }
 
         public List<TEntity> GetAll(Expression<Func<TEntity, bool>> filter = null)
@@ -53,7 +53,7 @@ namespace Core.DataAccess.EntityFramewrok
             using (TContext context = new TContext())
             {
                 var updateEntity = context.Entry(entity);
-                updateEntity.State = EntityState.Deleted;
+                updateEntity.State = EntityState.Modified;
                 context.SaveChanges();
             }
         }
