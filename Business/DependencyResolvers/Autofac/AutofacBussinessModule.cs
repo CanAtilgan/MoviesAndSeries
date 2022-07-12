@@ -10,7 +10,7 @@ using System.Text;
 namespace Business.DependencyResolvers.Autofac
 {
     public class AutofacBussinessModule:Module
-    {
+    {   //depency injection çözümleme alanı
         protected override void Load(ContainerBuilder builder)
         {//contsructorlara instance üretim alanı, isteklere referans veriyor
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();

@@ -13,6 +13,7 @@ namespace Business.Abstract
         IResult Delete(Movie movie);
         IResult Update(Movie movie);
         IDataResult<List<Movie>> GetAll();
+                    //T kısmı , Idataresult taki data alani için  
         IDataResult<Movie> Get(int id);
         IDataResult<List<MovieDetailDto>> GetMovieDetails();
     }

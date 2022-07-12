@@ -10,5 +10,6 @@ namespace Business.Constants
         public static string UserUpdate = "Kullanıcı bilgileri güncellendi..";
         public static string UserUpdateError = "Kullanıcı bilgileri güncellenemedi!!!.";
         public static string MovieUpdate = "Film Güncellendi..";
+        public static string ExistingMovie = "Bu film daha önce yüklenmiş...";
     }
 }

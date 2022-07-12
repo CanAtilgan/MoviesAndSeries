@@ -6,7 +6,7 @@ namespace Core.Utilities.Results
 {//temel void yapilari için
     public class Result : IResult
     {                                               //çalıştıracağı diğer contu işaretledik, tekrarlamayı önlemek için
-        public Result(bool success , string message):this(success)
+        public Result(bool success , string message):this(success)//bu classın(this) ,tek parametreli olan ctor'una bu değeri yolla 
         {//readonli'ler constrocter içinde set edilebilir .(sadece get olan özellik durumu olanlarda)
             Message = message;
         }
