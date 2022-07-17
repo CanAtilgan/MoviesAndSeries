@@ -7,7 +7,7 @@ using System.Text;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class AdminDal : EntitiyRepositoryBase<Admin, MovieAndSeriesContext>,IAdminDal
+    public class EfMovieImageDal: EntitiyRepositoryBase<MovieImage,MovieAndSeriesContext>, IMovieImageDal
     {
     }
 }

@@ -89,15 +89,15 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        private IResult CheckCategoryLimitNot()
-        {
-            var result = _categoryService.GetAll().Count();
-            if (result>15)
-            {
-                return new ErrorResult(Messages.ExistingMovie);
-            }
-            return new SuccessResult();
-        }
+        //private IResult CheckCategoryLimitNot()
+        //{
+        //    var result = _categoryService.GetAll().Data;
+        //    if (result.Count>15)
+        //    {
+        //        return new ErrorResult(Messages.ExistingMovie);
+        //    }
+        //    return new SuccessResult();
+        //}
 
 
     }

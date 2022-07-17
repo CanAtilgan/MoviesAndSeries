@@ -18,6 +18,12 @@ namespace Business.DependencyResolvers.Autofac
 
             builder.RegisterType<MovieManager>().As<IMovieService>().SingleInstance();
             builder.RegisterType<EfMovieDal>().As<IMovieDal>().SingleInstance();
+
+            builder.RegisterType<MovieImageManager>().As<IMovieImageService>().SingleInstance();
+            builder.RegisterType<EfMovieImageDal>().As<IMovieImageDal>().SingleInstance();
+
+            builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
+            builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
         }
     }
 }

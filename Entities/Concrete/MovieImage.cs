@@ -11,5 +11,6 @@ namespace Entities.Concrete
         public int MovieId { get; set; }
         public string ImagePath { get; set; }
         public DateTime? DateTime { get; set; }
+        public string Base64 { get; set; }
     }
 }

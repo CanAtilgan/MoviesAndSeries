@@ -1,4 +1,5 @@
 ﻿using Business.Concrete;
+using Core.Utilities.FilePath;
 using DataAccess.Concrete;
 using DataAccess.Concrete.EntityFramework;
 using Entities.Concrete;
@@ -18,6 +19,13 @@ namespace UI
             //{
             //    Console.WriteLine("{0} ------ {1}", user.UserName, user.Email);
             //}mm
+
+
+            FilePath fp = new FilePath();
+            FilePath.Dco();
+
+
+
 
             UserManager userManager = new UserManager(new EfUserDal());
             var result = userManager.GetAll();
@@ -43,24 +51,24 @@ namespace UI
             CategoryManager category = new CategoryManager(new EfCategoryDal());
             category.Add(cate);
 
-            foreach (var catego in category.GetAll())
-            {
-                Console.WriteLine("{0} ---{1}", catego.CategoryName, catego.Id);
-            }
+            //foreach (var catego in category.GetAll())
+            //{
+            //    Console.WriteLine("{0} ---{1}", catego.CategoryName, catego.Id);
+            //}
         }
 
-        private static MovieManager MovieTest()
-        {
+       // private static MovieManager MovieTest()
+        //{
             Movie movie3 = new Movie() { MovieName = "Yürüyen Ölüler", Description = "KORKU FİLMİ SEVERLER", CategoryId = 2,Direction="jONY" };
-            MovieManager movieManager = new MovieManager(new EfMovieDal());
+           // MovieManager movieManager = new MovieManager(new EfMovieDal());
             //movieManager.Add(movie3);
             //foreach (var mov in movieManager.GetMovieDetails())
             //{
             //    Console.WriteLine("{0} ------ {1}", mov.MovieName, mov.CategoryName);
             //}
 
-            return movieManager;
-        }
+            //return movieManager;
+        //}
     }
 }
 //IDisposable pattern implementation of c# => araştır

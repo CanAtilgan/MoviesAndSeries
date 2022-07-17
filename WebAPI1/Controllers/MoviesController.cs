@@ -41,7 +41,7 @@ namespace WebAPI1.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpPost("update")]//update sıkıntılı ona bak
+        [HttpPost("update")]    
         public IActionResult Update(Movie movie)
         {
             var result = _movieService.Update(movie);
