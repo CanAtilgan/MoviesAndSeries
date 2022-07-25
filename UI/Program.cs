@@ -20,19 +20,18 @@ namespace UI
             //    Console.WriteLine("{0} ------ {1}", user.UserName, user.Email);
             //}mm
 
-
-            FilePath fp = new FilePath();
-            FilePath.Dco();
-
-
+            //MovieImage movieImage = new MovieImage { Id=1,DateTime=DateTime.Now,ImagePath="doct.jpg"};
+            //FilePath<MovieImage> fp = new FilePath<MovieImage>();
+            //fp.Add(movieImage);
+            
 
 
             UserManager userManager = new UserManager(new EfUserDal());
-            var result = userManager.GetAll();
-            foreach (var user in result.Message)
-            {
-                Console.WriteLine(user);
-            }
+            //var result = userManager.GetAll();
+            //foreach (var user in result.Message)
+            //{
+            //    Console.WriteLine(user);
+            //}
             
             
              

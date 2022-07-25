@@ -5,6 +5,7 @@ using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 
@@ -12,52 +13,56 @@ namespace Business.Concrete
 {
     public class MovieImageManager : IMovieImageService
     {
-        IMovieImageDal _movieImageDal;
-        
 
-        public MovieImageManager(IMovieImageDal movieImageDal)
-        {
-            _movieImageDal = movieImageDal;
-        }
 
-        public IResult Add(MovieImage movieImage)
+        public IResult Add(FileRequestDto fileUploadRequest)
         {
-            
-            movieImage.DateTime=DateTime.Now;
-            _movieImageDal.Add(movieImage);
-            return new SuccessResult();
-        }
+            var indexofData = fileUploadRequest.Base64.IndexOf(";base64,", StringComparison.OrdinalIgnoreCase) + 8; //datanın başlangıç indexini tespit etme
 
-        public IResult Delete(MovieImage movieImage)
-        {
-            _movieImageDal.Delete(movieImage);
-            return new SuccessResult();
-        }
+            var dataS = fileUploadRequest.Base64.Substring(indexofData);//data için kaçıncı indexten sonra alınacak
+                                                                        //var demo = Convert.FromBase64String(dataS);
 
-        public IDataResult<List<MovieImage>> GetAll()
-        {
-            return new SuccessDataResult<List<MovieImage>>(_movieImageDal.GetAll());
-        }
-
-        public IDataResult<MovieImage> GetById(int id)
-        {
-            return new SuccessDataResult<MovieImage>(_movieImageDal.Get(m=>m.Id==id));
-        }
-
-        public IResult Update(MovieImage movieImage)
-        {
-            _movieImageDal.Update(movieImage);
-            return new SuccessResult();
-        }
-
-        private IResult MovieImageOfCount(int id)
-        {
-            var result = _movieImageDal.GetAll(m => m.MovieId ==id ).Any();
-            if (result)
+            string dosyaYolu = $@"C:\Api\Assets\{fileUploadRequest.Collection}\{fileUploadRequest.EntityId}\";
+            bool exists = Directory.Exists(dosyaYolu);
+            var fileType = fileUploadRequest.FileName.Substring(fileUploadRequest.FileName.LastIndexOf(".") + 1);
+            //var fileName = GuidHelper.CreateGuid();
+            if (exists == true)
             {
-                return new ErrorResult(Messages.MovieImageOfCount);
+                File.WriteAllBytes($@"{dosyaYolu}{fileUploadRequest.FileName}.{fileType}_", Convert.FromBase64String(dataS));
             }
-            return new SuccessResult();
+
+            else
+            {
+                DirectoryInfo di = Directory.CreateDirectory(dosyaYolu);
+                File.WriteAllBytes($@"{dosyaYolu}{fileUploadRequest.FileName}.{fileType}_", Convert.FromBase64String(dataS));
+            }
+            return new SuccessResult("Başarıyla Eklendi");
         }
+
+        public IResult Delete(FileRequestDto fileUploadRequest)
+        {
+            string dosyaYolu = $@"C:\Api\Assets\{fileUploadRequest.Collection}\{fileUploadRequest.EntityId}\";
+            bool exists = Directory.Exists(dosyaYolu);
+            
+            if (exists==true)
+            {
+                string[] bull = Directory.GetFiles(dosyaYolu);//ilgili klasör içinde 
+                string filtre = fileUploadRequest.FileName;
+                
+                foreach (string file in bull)
+                {
+                    bool result = file.Contains(filtre);
+                    if(result==true)
+                    {
+                        File.Delete(file);
+                        return new SuccessResult("başarıyla silindi");
+                    }
+                }
+            }
+            return new ErrorResult();
+            
+        }
+
+        
     }
 }

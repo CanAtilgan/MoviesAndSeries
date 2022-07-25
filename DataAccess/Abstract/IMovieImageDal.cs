@@ -6,7 +6,7 @@ using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IMovieImageDal :IEntityRepository<MovieImage>
-    {
-    }
+    //public interface IMovieImageDal :IEntityRepository<MovieImage>
+    //{
+    //}
 }

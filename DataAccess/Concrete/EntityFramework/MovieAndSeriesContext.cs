@@ -21,7 +21,7 @@ namespace DataAccess.Concrete.EntityFramework
         
         public DbSet<Series> Series { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<MovieImage> MovieImages { get; set; }
+        //public DbSet<MovieImage> MovieImages { get; set; }
     }
 }
 
