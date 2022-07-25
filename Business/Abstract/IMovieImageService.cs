@@ -8,10 +8,10 @@ namespace Business.Abstract
 {
     public interface IMovieImageService
     {
-        IResult Add(MovieImage movieImage);
-        IResult Delete(MovieImage movieImage);
-        IResult Update(MovieImage movieImage);
-        IDataResult<List<MovieImage>> GetAll();
-        IDataResult<MovieImage> GetById(int id);
+        IResult Add(FileRequestDto movieImage);
+        IResult Delete(FileRequestDto fileUploadRequest);
+        //IResult Update(FileRequestDto movieImage);
+        //IDataResult<List<FileRequestDto>> GetAll();
+        //IDataResult<FileRequestDto> GetById(int id);
     }
 }

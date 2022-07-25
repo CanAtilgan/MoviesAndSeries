@@ -5,12 +5,13 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class MovieImage:IEntity
+    public class FileRequestDto: IDto
     {
         public int Id { get; set; }
-        public int MovieId { get; set; }
-        public string ImagePath { get; set; }
-        public DateTime? DateTime { get; set; }
+        public int EntityId { get; set; }
         public string Base64 { get; set; }
+        public string DataType { get; set; }
+        public string Collection{ get; set; }
+        public string FileName{ get; set; }
     }
 }

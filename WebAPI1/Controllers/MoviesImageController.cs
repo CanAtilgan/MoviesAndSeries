@@ -7,53 +7,45 @@ namespace WebAPI1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class MoviesImageController : ControllerBase
+    public class FileStoragesController: ControllerBase
     {
         IMovieImageService _movieImageService;
 
-        public MoviesImageController(IMovieImageService movieImageService)
+        public FileStoragesController(IMovieImageService movieImageService)
         {
             _movieImageService = movieImageService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add(MovieImage movieImage)
+        public IActionResult Add(FileRequestDto fileRequestDto)
         {
-            var result = _movieImageService.Add(movieImage);
+            var result = _movieImageService.Add(fileRequestDto);
             if (result.Success)
             {
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
         }
-        [HttpPost("update")]
-        public IActionResult Update(MovieImage movieImage)
+        //[HttpPost("update")]
+        //public IActionResult Update(MovieImage movieImage)
+        //{
+        //    var result = _movieImageService.Update(movieImage);
+        //    if (result.Success)
+        //    {
+        //        return Ok(result.Message);
+        //    }
+        //    return BadRequest(result.Message);
+        //}
+       
+        [HttpPost("delet")]
+        public IActionResult Delete(FileRequestDto fileUploadRequest)
         {
-            var result = _movieImageService.Update(movieImage);
+            var result = _movieImageService.Delete(fileUploadRequest);
             if (result.Success)
             {
                 return Ok(result.Message);
             }
             return BadRequest(result.Message);
         }
-        [HttpPost("delete")]
-        public IActionResult Delete(int Id)
-        {
-            var movieImage = _movieImageService.GetById(Id).Data;
-            var result = _movieImageService.Delete(movieImage);
-            if (result.Success)
-            {
-                return Ok(result.Message);
-            }
-            return NotFound(result.Message);
-        }
-
-        [HttpGet("getall")]
-        public IActionResult GetAll()
-        {
-            var result = _movieImageService.GetAll();
-            return Ok(result);
-        }
-
     }
 }
