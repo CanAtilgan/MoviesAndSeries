@@ -26,7 +26,7 @@ namespace DataAccess.Concrete.EntityFramework
                                  CategoryName =c.CategoryName
                              };
 
-                return result.ToList( );
+                return result.ToList();
             }
             
         }

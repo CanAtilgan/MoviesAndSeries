@@ -6,12 +6,12 @@ using System.Text;
 
 namespace Business.Abstract
 {
-    public interface IMovieImageService
+    public interface IFileService
     {
         IResult Add(FileRequestDto movieImage);
         IResult Delete(FileRequestDto fileUploadRequest);
         //IResult Update(FileRequestDto movieImage);
-        //IDataResult<List<FileRequestDto>> GetAll();
-        //IDataResult<FileRequestDto> GetById(int id);
+       // IDataResult<List<FileRequestDto>> GetAll();
+        IDataResult<FileRequestDto> Get(int id);
     }
 }

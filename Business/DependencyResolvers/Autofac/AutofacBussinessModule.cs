@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.Security.Jwt;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -19,11 +20,17 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<MovieManager>().As<IMovieService>().SingleInstance();
             builder.RegisterType<EfMovieDal>().As<IMovieDal>().SingleInstance();
 
-            builder.RegisterType<MovieImageManager>().As<IMovieImageService>().SingleInstance();
-            //builder.RegisterType<EfMovieImageDal>().As<IMovieImageDal>().SingleInstance();
+            builder.RegisterType<FileManager>().As<IFileService>().SingleInstance();
+
+
+            builder.RegisterType<EfFileRepoDal>().As<IFileRepoDal>().SingleInstance();
 
             builder.RegisterType<CategoryManager>().As<ICategoryService>().SingleInstance();
             builder.RegisterType<EfCategoryDal>().As<ICategoryDal>().SingleInstance();
+
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
         }
     }
 }

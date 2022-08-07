@@ -1,4 +1,5 @@
-﻿using DataAccess.Abstract;
+﻿using Core.Entities.Concrete;
+using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
@@ -14,9 +15,9 @@ namespace DataAccess.Concrete
 
         public InMemoryUserDal()
         {
-            _users = new List<User> { new User { Id = 1, FirstName = "cAN", Adress="iZMİR",Email="atilgan@gmail.com",Password="123456789" },
-                                      new User { Id = 2, FirstName = "Hasan", Adress="ANKARA",Email="hasan@gmail.com",Password="123456789" },
-                                      new User { Id = 3, FirstName = "Uğur", Adress="İSTANBUL",Email="ugur@gmail.com",Password="123456789" },};
+            _users = new List<User> { new User { Id = 1, FirstName = "cAN",Email="atilgan@gmail.com" },
+                                      new User { Id = 2, FirstName = "Hasan",Email="hasan@gmail.com" },
+                                      new User { Id = 3, FirstName = "Uğur",Email="ugur@gmail.com" },};
         }
 
         public void Add(User user)
@@ -52,13 +53,18 @@ namespace DataAccess.Concrete
             throw new NotImplementedException();
         }
 
+        public List<OperationClaim> GetClaims(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(User user)
         {
             User UserToUpdate = _users.SingleOrDefault(u => u.Id == user.Id);
-            user.Adress = UserToUpdate.Adress;
-            user.Email = UserToUpdate.Email;
-            user.Password = UserToUpdate.Password;
-            user.FirstName = UserToUpdate.FirstName;
+            //user.Adress = UserToUpdate.Adress;
+            //user.Email = UserToUpdate.Email;
+            //user.Password = UserToUpdate.Password;
+            //user.FirstName = UserToUpdate.FirstName;
            
         }
     }

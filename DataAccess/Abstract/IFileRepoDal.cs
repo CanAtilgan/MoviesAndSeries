@@ -1,15 +1,15 @@
 ﻿using Core.DataAccess;
-using Core.Entities.Concrete;
+using Core.Entities;
 using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Linq.Expressions;
 using System.Text;
 
 namespace DataAccess.Abstract
 {
-    public interface IUserDal : IEntityRepository<User>
+    public interface IFileRepoDal : IEntityRepository<FileRepo>
     {
-        List<OperationClaim> GetClaims(User user);
-
+       
     }
 }
