@@ -16,10 +16,14 @@ namespace Business.Constants
         public static string RegistrationSucces = "Kullanıcı kaydı başarılı..";
 
 
+        public static string SuccesCategory="Kategori başarıyla eklendi";
+        public static string CategoryAvailable = "Kategori Mevcut";
+
         public static string UserNotFound = "Kullanıcı Bulunamadı";
         public static string PasswordError="Şifre Hatalı";
         public static string SuccessfulLogin = "Giriş Başarılı";
         public static string UserRegistrationSuccessful = "Kullanıcı Kayıt Başarılı";
         public static string UserAvailable = "Kullanıcı Daha Önceden Kayıt Olmuş";
+        
     }
 }

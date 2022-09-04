@@ -14,5 +14,7 @@ namespace Core.Entities.Concrete
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
         public bool Status{ get; set; }
+        public bool ActivaionStatus { get; set; }
+        public string ActivationCode { get; set; }
     }
 }

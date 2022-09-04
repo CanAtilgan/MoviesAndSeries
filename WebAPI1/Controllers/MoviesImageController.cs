@@ -59,6 +59,15 @@ namespace WebAPI1.Controllers
             return BadRequest(result.Message);
         }
 
-        
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _fileService.GetAll();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest("Htalı istek");
+        }
     }
 }

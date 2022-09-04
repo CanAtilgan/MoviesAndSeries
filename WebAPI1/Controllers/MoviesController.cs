@@ -11,10 +11,12 @@ namespace WebAPI1.Controllers
     public class MoviesController : ControllerBase
     {
         IMovieService _movieService;
+       
 
         public MoviesController(IMovieService movieService)
         {
             _movieService = movieService;
+           
         }
 
 
@@ -51,7 +53,23 @@ namespace WebAPI1.Controllers
             }
             return BadRequest(result);
         }
-
+       
+        [HttpGet("moviedetails")]
+        public IActionResult GetMovieDetails()
+        {
+            var result = _movieService.GetMovieDetails();
+            if (result.Success)
+            {
+                return Ok(result.Data);
+            }
+            return BadRequest();
+        }
+       [HttpGet("getfile")]
+       public IActionResult GetMovieFile(int id)
+        {
+            var result= _movieService.GetMovieFile(id);
+            return Ok(result);
+        }
 
 
     }

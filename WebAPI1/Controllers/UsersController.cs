@@ -34,11 +34,21 @@ namespace WebAPI1.Controllers
         public IActionResult GetByEmail(string email)
         {
             var result = _userService.GetByEmail(email);
-            if (!result.Success)
+            if (result.Data==null)
             {
-                return BadRequest(result.Message);
+                return BadRequest("Kullanıcı bulunamadı");
             }
-            return Ok(result.Message);
+            return Ok(result.Data);
+        }
+        [HttpPost("update")]
+        public IActionResult Update(User user)
+        {
+            var result = _userService.Update(user);
+            if (result.Success)
+            {
+                return Ok(result.Message);
+            }
+            return BadRequest(result.Message);
         }
     }
 }

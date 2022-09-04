@@ -11,7 +11,8 @@ namespace Business.Abstract
         IResult Add(FileRequestDto movieImage);
         IResult Delete(FileRequestDto fileUploadRequest);
         //IResult Update(FileRequestDto movieImage);
-       // IDataResult<List<FileRequestDto>> GetAll();
+        IDataResult<List<FileRepo>> GetAll();
         IDataResult<FileRequestDto> Get(int id);
+        string GetMovieUri(int entityId);
     }
 }

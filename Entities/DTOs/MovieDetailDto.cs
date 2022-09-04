@@ -10,6 +10,7 @@ namespace Entities.DTOs
         public int MoviesId { get; set; }
         public string MovieName { get; set; }
         public string CategoryName { get; set; }
+        public string Photo { get; set; }
 
     }
 }

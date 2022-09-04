@@ -40,7 +40,6 @@ namespace WebAPI1
             //services.AddSingleton<IMovieService, MovieManager>();
             //services.AddSingleton<IMovieDal, EfMovieDal > ();
             
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -50,7 +49,7 @@ namespace WebAPI1
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
+            app.UseCors(builder => builder.WithOrigins("http://localhost:4200").AllowAnyHeader());//uý için izin veriyoruz,burdan istek gelirse izin ver , websitesi domeinleri yazýlýr 
 
             app.UseHttpsRedirection();
 

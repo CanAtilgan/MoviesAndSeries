@@ -20,10 +20,13 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from m in context.Movies
                              join c in context.Categories
                              on m.CategoryId equals c.Id
+                             join p in context.FileRepos
+                             on m.Photo equals Convert.ToString(p.Id)
                              select new MovieDetailDto 
                              {   MoviesId=m.Id,
                                  MovieName = m.MovieName,
-                                 CategoryName =c.CategoryName
+                                 CategoryName =c.CategoryName,
+                                 Photo = p.FileName
                              };
 
                 return result.ToList();

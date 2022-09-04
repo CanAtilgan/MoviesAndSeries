@@ -22,10 +22,12 @@ namespace Business.Concrete
         IMovieDal _movieDal;
         //ICategoryDal _categoryDal; BU YAPI YANLIŞTIR. BİR ENTİTY MANAGER , KENDİSİ HARİÇ BAŞKA DALI ENJECTE EDEMEZ 
         ICategoryService _categoryService;
-        public MovieManager(IMovieDal movieDal,ICategoryService categoryService) //dependency injection
+        IFileService _fileService;
+        public MovieManager(IMovieDal movieDal,ICategoryService categoryService,IFileService fileService) //dependency injection
         {
             _movieDal = movieDal;
             _categoryService = categoryService;
+            _fileService = fileService;
         }
 
         [ValidationAspect(typeof(MovieValidator))]
@@ -65,12 +67,26 @@ namespace Business.Concrete
 
         public IDataResult<List<Movie>> GetAll()
         {
-            return new SuccessDataResult<List<Movie>>(_movieDal.GetAll());
+            var movies = _movieDal.GetAll();
+            foreach (var movie in movies)
+            {
+                movie.Photo = _fileService.GetMovieUri(movie.Id);
+            }
+           return new SuccessDataResult<List<Movie>>(movies);
         }
 
         public IDataResult<List<MovieDetailDto>> GetMovieDetails()
         {
             return new SuccessDataResult<List<MovieDetailDto>> (_movieDal.GetMovieDetails());
+        }
+
+        public IDataResult<string> GetMovieFile(int id)
+        {
+            var movieFiles = _fileService.Get(id);
+            var test = movieFiles.Data.EntityId;
+            var file = $@"C:/Api/Assets/Movie/{test.Value}/{movieFiles.Data.FileName}{movieFiles.Data.DataType.Trim()}_";
+            var uri = new Uri(file);
+            return new SuccessDataResult<string>(uri.AbsolutePath);
         }
 
         public IResult Update(Movie movie)
@@ -79,7 +95,11 @@ namespace Business.Concrete
             return new SuccessResult(Messages.MovieUpdate);
         }
 
-
+        private IDataResult<string> SearcFile(int entityId)
+        {
+            var result = _fileService.GetMovieUri(entityId);
+            return new SuccessDataResult<string>(data:"uel");
+        }
         private IResult CheckIfMoviveNameExists(string moviName)
         {
             var result = _movieDal.GetAll(m=>m.MovieName == moviName).Any();
@@ -89,16 +109,12 @@ namespace Business.Concrete
             }
             return new SuccessResult();
         }
-        //private IResult CheckCategoryLimitNot()
-        //{
-        //    var result = _categoryService.GetAll().Data;
-        //    if (result.Count>15)
-        //    {
-        //        return new ErrorResult(Messages.ExistingMovie);
-        //    }
-        //    return new SuccessResult();
-        //}
 
+        
 
     }
 }
+
+//var selectFile = _movieDal.GetAll();
+//foreach (var movie in selectFile) { var fileId = movie.Id; };
+////var convertId = file;

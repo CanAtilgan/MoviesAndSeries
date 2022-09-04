@@ -38,7 +38,7 @@ namespace WebAPI1.Controllers
         public IActionResult Register(UserForRegisterDto userForRegisterDto)
         {
             var userCheckRegister = _authService.UserExixts(userForRegisterDto.Email);
-            if (userCheckRegister.Success)
+            if (!userCheckRegister.Success)
             {
                 return BadRequest(userCheckRegister.Message);
             }

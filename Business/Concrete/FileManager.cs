@@ -92,7 +92,6 @@ namespace Business.Concrete
                 {
                     var base64 = File.ReadAllBytes(file);
                     var base6 = Convert.ToBase64String(base64);
-                    //var result = ($@"{file}{id.EntityId}", Convert.ToBase64String(basee));
                     return new SuccessDataResult<FileRequestDto>(new FileRequestDto
                     {
                         AddedUserId = fileRepo.AddedUserId,
@@ -109,23 +108,18 @@ namespace Business.Concrete
             return new ErrorDataResult<FileRequestDto>("Hatalı");
         }
 
-        //public IDataResult<List<FileRequestDto>> GetAll()
-        //{
-            
-        //    var filePath = $@"C:\Api\Assets";
-           
-        //    var exixt = Directory.Exists(filePath);
-        //    if (exixt == true)
-        //    {
-        //        string[] allfile = Directory.GetFiles(filePath,"*.*",SearchOption.AllDirectories);
-        //        foreach (var f in allfile)
-        //        {
-        //            Console.WriteLine(f);
-        //            return new SuccessDataResult<List<FileRequestDto>>(new FileRequestDto().FileName) ;
-        //        }
-                
-        //    }
-        //    return null;
-        //}
+        
+        public IDataResult<List<FileRepo>> GetAll()
+        { 
+            return new SuccessDataResult<List<FileRepo>>(_fileRepoDal.GetAll());
+        }
+
+        public string GetMovieUri(int entityId)
+        {
+            var fileInfo = _fileRepoDal.Get(f=>f.EntityId == entityId && f.Collection == "Movie");   
+            if (fileInfo == null) return null;
+            var uri = $@"C:\Api\Assets\{fileInfo.Collection.Trim()}\{fileInfo.EntityId}\{fileInfo.FileName}{fileInfo.FileType.Trim()}_";
+            return uri;
+        }
     }
 }

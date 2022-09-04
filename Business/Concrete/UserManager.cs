@@ -28,6 +28,7 @@ namespace Business.Concrete
         public IDataResult<User> GetByEmail(string email)
         {
             return new SuccessDataResult<User>(_userdal.Get(u=>u.Email==email));
+            
         }
 
         public IDataResult<List<OperationClaim>> GetClaims(User user)
