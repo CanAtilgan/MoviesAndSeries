@@ -1,7 +1,11 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using Core.Utilities.Security.Jwt;
+using Core.Utilities.Verification;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
 using System;
@@ -31,6 +35,16 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
 
             builder.RegisterType<JwtHelper>().As<ITokenHelper>().SingleInstance();
+
+            builder.RegisterType<ActivationCode>().As<IActivation>().SingleInstance();
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
         }
     }
+    
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BussinesAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -30,6 +31,7 @@ namespace Business.Concrete
             _fileService = fileService;
         }
 
+        [SecuredOperation("admin")]
         [ValidationAspect(typeof(MovieValidator))]
         public IResult Add(Movie movie)
         {
@@ -65,6 +67,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Movie>(_movieDal.Get(m => m.Id == id));
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<Movie>> GetAll()
         {
             var movies = _movieDal.GetAll();
@@ -98,7 +101,7 @@ namespace Business.Concrete
         private IDataResult<string> SearcFile(int entityId)
         {
             var result = _fileService.GetMovieUri(entityId);
-            return new SuccessDataResult<string>(data:"uel");
+            return new SuccessDataResult<string>(data:"url");
         }
         private IResult CheckIfMoviveNameExists(string moviName)
         {
