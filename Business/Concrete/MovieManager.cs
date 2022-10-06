@@ -31,7 +31,7 @@ namespace Business.Concrete
             _fileService = fileService;
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         [ValidationAspect(typeof(MovieValidator))]
         public IResult Add(Movie movie)
         {
@@ -67,7 +67,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Movie>(_movieDal.Get(m => m.Id == id));
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IDataResult<List<Movie>> GetAll()
         {
             var movies = _movieDal.GetAll();
@@ -76,11 +76,6 @@ namespace Business.Concrete
                 movie.Photo = _fileService.GetMovieUri(movie.Id);
             }
            return new SuccessDataResult<List<Movie>>(movies);
-        }
-
-        public IDataResult<List<MovieDetailDto>> GetMovieDetails()
-        {
-            return new SuccessDataResult<List<MovieDetailDto>> (_movieDal.GetMovieDetails());
         }
 
         public IDataResult<string> GetMovieFile(int id)
@@ -113,8 +108,17 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
-        
+        public IDataResult<List<Movie>> GetAllByCategory(int categoryId)
+        {
+            var result = _movieDal.GetAll(x => x.CategoryId == categoryId);
+            return new SuccessDataResult<List<Movie>>(result,message:"başarılı");
+        }   
 
+        public IDataResult<MovieDetailDto> GetMovieDetailById(int id)
+        {
+            return new SuccessDataResult<MovieDetailDto>(_movieDal.GetMovieDetails(id));
+        }
+            
     }
 }
 

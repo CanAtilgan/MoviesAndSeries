@@ -15,7 +15,8 @@ namespace Business.Abstract
         IDataResult<List<Movie>> GetAll();
                     //T kısmı , Idataresult taki data alani için  
         IDataResult<Movie> Get(int id);
-        IDataResult<List<MovieDetailDto>> GetMovieDetails();
         IDataResult<string> GetMovieFile(int id);
+        IDataResult<List<Movie>> GetAllByCategory(int categoryId);
+        IDataResult<MovieDetailDto> GetMovieDetailById(int id);
     }
 }

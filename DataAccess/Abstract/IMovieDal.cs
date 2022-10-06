@@ -9,6 +9,6 @@ namespace DataAccess.Abstract
 {
     public interface IMovieDal : IEntityRepository<Movie>
     {
-        List<MovieDetailDto> GetMovieDetails();
+        MovieDetailDto GetMovieDetails(int id);
     }
 }

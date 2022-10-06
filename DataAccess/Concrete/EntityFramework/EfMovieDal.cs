@@ -13,23 +13,25 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfMovieDal : EntitiyRepositoryBase<Movie, MovieAndSeriesContext>, IMovieDal
     {
-        public List<MovieDetailDto> GetMovieDetails()
+        public MovieDetailDto GetMovieDetails(int id)
         {
             using(MovieAndSeriesContext context = new MovieAndSeriesContext())
             {
-                var result = from m in context.Movies
+                var result = from m in context.Movies where m.Id == id
                              join c in context.Categories
                              on m.CategoryId equals c.Id
                              join p in context.FileRepos
-                             on m.Photo equals Convert.ToString(p.Id)
-                             select new MovieDetailDto 
-                             {   MoviesId=m.Id,
+                             on m.Photo equals Convert.ToString(p.Id) into crm
+                             from p in crm.DefaultIfEmpty()
+                             select new MovieDetailDto ()
+                             {   MovieId=m.Id,
                                  MovieName = m.MovieName,
                                  CategoryName =c.CategoryName,
+                                 Description =m.Description,
                                  Photo = p.FileName
                              };
 
-                return result.ToList();
+                return result.FirstOrDefault();
             }
             
         }
